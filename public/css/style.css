@@ -1,0 +1,9 @@
+.center-jumbotron {
+    text-align: center;
+}
+
+.center-form {
+    margin: 0 auto;
+    width: 40%;
+    text-align: left;
+}

@@ -1,0 +1,16 @@
+{
+  "name": "jarvis",
+  "version": "0.0.0",
+  "authors": [
+    "Brian Blanchard <briblanch@gmail.com>"
+  ],
+  "description": "Web-based natural speech home recognition automation",
+  "dependencies": {
+    "angular": "~1.2.5",
+    "sass-bootstrap-compass": "~3.0.21",
+    "bootstrap": "~3.0.3"
+  },
+  "resolutions": {
+    "angular": "~1.2.5"
+  }
+}
