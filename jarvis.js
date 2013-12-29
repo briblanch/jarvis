@@ -47,7 +47,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.bodyParser());
 app.use(express.session());
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.session({secret: 'jarvis'}));
 app.use(app.router);
 
 // development only
@@ -70,6 +70,8 @@ app.get('*', routes.index);
 
 //API
 app.post('/api/register', api.register);
+app.post('/api/login', api.login);
+app.post('/api/sethueinfo', routes.ensureAuthenticated, api.setHueInfo);
 
 // http.createServer(httpApp).listen(httpApp.get('port'), function(){
 // });

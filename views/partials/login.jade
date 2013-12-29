@@ -1,0 +1,11 @@
+.jumbotron.center-jumbotron
+  form(role='form', ng-submit="login()").center-form
+    div.form-group
+      label(for='exampleInputEmail1') Email address
+      input.form-control(type='email', placeholder='Enter email', ng-model="username")
+    div.form-group
+      label(for='exampleInputPassword1') Password
+      input.form-control(type='password', placeholder='Password', ng-model="password")
+    div.form-group
+      button.btn.btn-success.btn-lg.center(type="submit") Sign In
+    div(ng-show="loginError").alert.alert-danger Incorrect email or password

@@ -1,0 +1,11 @@
+//- Modal
+div(id="setupModal", role="dialog", aria-labelledby="setupModalLabel", aria-hidden="true").modal.fade
+  div.modal-dialog
+    div.modal-content
+      div.modal-header
+        h4(id="setupModalTitle").modal-title Setup
+      div.modal-body.center
+        h4(ng-hide="pushButtonPrompt") Setting up Jarvis. Please wait...
+        h4(ng-show="pushButtonPrompt") Push the button on your Hue bridge then push the button below
+        button(ng-show="pushButtonPrompt", ng-click="finishSetup()").btn.btn-success Complete Setup
+

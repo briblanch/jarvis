@@ -1,20 +1,56 @@
 //Initial setup of app
 var controllers = {};
 
-controllers.index = function($scope, $http, $location) {
+controllers.auth = function($scope, $location, Auth) {
     $scope.username;
     $scope.password;
 
-    $scope.signup= function() {
-        $http.post('/api/register', {username: $scope.username,
-                                    password: $scope.password })
-        .then(function(data) {
+    $scope.loginError = false;
 
+    $scope.signUp = function() {
+        Auth.register($scope.username, $scope.password).then(function() {
+            $location.path('/jarvis');
         });
     };
+
+    $scope.login = function() {
+        Auth.login($scope.username, $scope.password).then(function() {
+            $location.path('/jarvis');
+        }, function(err) {
+            $scope.loginError = true;
+        });
+    }
 };
 
-controllers.index.$inject = ['$scope', '$http'];
+controllers.auth.$inject = ['$scope', '$location', 'Auth'];
 
-angular.module('jarvis.controllers', [])
-    .controller('Index', controllers.index);
+controllers.jarvis = function($scope, Hue) {
+    $scope.pushButtonPrompt = false;
+
+    var promptPushButton = function() {
+        $scope.pushButtonPrompt = true;
+    };
+
+    var setupHue = function() {
+        $('#setupModal').modal('show');
+        Hue.findBridges()
+            .then(Hue.registerUser)
+            .then($scope.finishSetup, promptPushButton);
+    };
+
+    $scope.finishSetup = function() {
+        Hue.registerUser().then(function() {
+            $('#setupModal').modal('hide');
+        })
+    };
+
+    // setupHue();
+    Hue.setUserHueInformation();
+};
+
+controllers.jarvis.$inject = ['$scope', 'Hue'];
+
+var controllerModule = angular.module('jarvis.controllers', []);
+
+controllerModule.controller('Auth', controllers.auth);
+controllerModule.controller('Jarvis', controllers.jarvis);

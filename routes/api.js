@@ -17,3 +17,25 @@ exports.register= function(req, res) {
         });
     });
 };
+
+exports.login = function(req, res) {
+    passport.authenticate('local')(req, res, function() {
+        res.json({
+            message: "Successfully Logged In"
+        });
+    })
+};
+
+exports.setHueInfo = function(req, res) {
+    if (req.user) {
+        req.user.bridgeIp = req.body.bridgeIp;
+        req.user.hueUsername = req.body.hueUsername;
+
+        req.user.save(function(err, user) {
+            if (err) return;
+            res.json({
+                message: "Successfully saved hue information"
+            });
+        });
+    }
+};
