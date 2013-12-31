@@ -18,7 +18,7 @@ services.HueService = function($http, $q) {
 
     var registerUser = function() {
         var deferred = $q.defer();
-        var apiUrl = "http://" + bridgeip + "/api"
+        var apiUrl = "http://" + bridgeIp + "/api"
         var json = {
             devicetype: "Macbook"
         };

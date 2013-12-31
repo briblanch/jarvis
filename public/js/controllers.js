@@ -40,12 +40,12 @@ controllers.jarvis = function($scope, Hue) {
 
     $scope.finishSetup = function() {
         Hue.registerUser().then(function() {
+            Hue.setUserHueInformation();
             $('#setupModal').modal('hide');
         })
     };
 
-    // setupHue();
-    Hue.setUserHueInformation();
+    setupHue();
 };
 
 controllers.jarvis.$inject = ['$scope', 'Hue'];
